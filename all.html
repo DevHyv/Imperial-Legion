@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Imperial Legion Abogados | Litigio de Élite</title>
+    <meta name="description" content="Imperial Legion Abogados — Firma de litigio en derecho penal, familiar y patrimonial. Ciudad de México.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-alt: #0a0a0a;
+            --panel: #111111;
+            --red: #A3181F;
+            --red-bright: #C4252E;
+            --gold: #D4AF37;
+            --text-main: #EDEAE3;
+            --text-muted: #9E9891;
+            --line: #26221F;
+            --wa-green: #25D366;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
+
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(5,5,5,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+            z-index: 100;
+            padding: 12px 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: var(--panel);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+        .logo span { color: var(--gold); display: block; font-size: 1rem; letter-spacing: 2px; }
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .urgency-phone {
+            color: var(--red-bright);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .urgency-phone::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--red-bright);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(196, 37, 46, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(196, 37, 46, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(196, 37, 46, 0); }
+        }
+        .btn-cta {
+            background: var(--red);
+            color: var(--text-main);
+            padding: 10px 18px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-cta:hover { background: var(--red-bright); }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('URL_DE_TU_IMAGEN_AQUI');
+            background-size: cover;
+            background-position: center;
+            filter: blur(6px);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 9vw, 8rem);
+            line-height: 1.05;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .hero-title em {
+            color: var(--gold);
+            font-style: normal;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-left: 3px solid var(--red);
+            padding-left: 15px;
+            max-width: 600px;
+        }
+
+        .stats {
+            background: var(--red);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            border-top: 1px solid #6E0D12;
+        }
+        .stat-item {
+            padding: 25px 15px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-num span { font-size: 0.8rem; color: rgba(255,255,255,0.8); letter-spacing: 1px; display: block; margin-top: 5px; }
+        .stat-label { font-size: 0.75rem; color: #fff; text-transform: uppercase; }
+
+        .quote-section {
+            padding: 80px 0;
+            text-align: center;
+            background: var(--bg-alt);
+        }
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            color: var(--gold);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.2;
+            padding: 0 15px;
+        }
+        .quote-text span {
+            color: var(--text-main);
+        }
+
+        .materias { padding: 80px 0; }
+        .section-header { margin-bottom: 40px; }
+        .section-tag { color: var(--gold); font-family: 'Oswald', sans-serif; font-size: 1.2rem; }
+        .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 6vw, 3rem); text-transform: uppercase; line-height: 1.1; }
+        
+        .materia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .materia-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            padding: 30px;
+            position: relative;
+            transition: transform 0.4s, border-color 0.4s;
+            overflow: hidden;
+        }
+        .materia-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+        }
+        .materia-num { font-family: 'Oswald', sans-serif; font-size: 3.5rem; color: rgba(212,175,55,0.15); position: absolute; top: 15px; right: 20px; line-height: 1; }
+        .materia-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 10px; color: var(--text-main); }
+        .materia-card h3 em { color: var(--red-bright); font-style: normal; }
+        .materia-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
+        
+        .materia-list { list-style: none; opacity: 0; max-height: 0; transition: all 0.4s ease; border-top: 1px solid var(--line); padding-top: 15px; }
+        .materia-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; display: flex; gap: 8px; align-items: flex-start; }
+        .materia-list li::before { content: '■'; color: var(--red-bright); font-size: 0.6rem; margin-top: 4px; }
+
+        @media (hover: hover) and (pointer: fine) {
+            .materia-card:hover { transform: translateY(-5px); border-color: var(--red); }
+            .materia-card:hover::before { transform: scaleX(1); }
+            .materia-card:hover .materia-list { opacity: 1; max-height: 300px; }
+        }
+
+        @media (max-width: 768px) {
+            .materia-list { opacity: 1; max-height: 500px; border-top-color: var(--line); }
+            .materia-card::before { transform: scaleX(1); width: 40px; }
+            .materia-card { border-color: #333; }
+        }
+
+        .metodo { padding: 80px 0; background: var(--bg-alt); }
+        .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 40px; }
+        .step { position: relative; padding-left: 20px; border-left: 2px solid var(--line); }
+        .step-num { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--red-bright); line-height: 1; margin-bottom: 10px; }
+        .step h3 { font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; }
+        .step p { font-size: 0.9rem; color: var(--text-muted); }
+        
+        .contacto { padding: 80px 0; border-top: 1px solid var(--line); margin-bottom: 60px; }
+        .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        
+        .info-block { margin-bottom: 25px; border-bottom: 1px solid var(--line); padding-bottom: 15px; }
+        .info-block h4 { color: var(--red-bright); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .info-block p { font-size: 1rem; color: var(--text-main); }
+        .info-block p strong { color: var(--gold); display: block; font-size: 1.2rem; }
+
+        .map-container {
+            width: 100%;
+            min-height: 300px;
+            height: 100%;
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--red);
+            background: var(--panel);
+            overflow: hidden;
+        }
+        .map-container iframe { width: 100%; height: 100%; min-height: 300px; border: 0; }
+
+        .floating-wa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--wa-green);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: transform 0.3s;
+        }
+        .floating-wa:hover, .floating-wa:active { transform: scale(1.1); }
+        .floating-wa svg { width: 35px; height: 35px; fill: currentColor; }
+
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; padding: 20px; }
+        .modal.open { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--panel); padding: 30px; max-width: 90%; width: 500px; border-top: 2px solid var(--red); position: relative; }
+        .modal-close { position: absolute; top: 10px; right: 15px; background: none; border: none; color: var(--gold); font-size: 1.8rem; cursor: pointer; }
+
+        @media (max-width: 900px) {
+            .contacto-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 12px 20px; }
+            .urgency-phone { display: none; }
+            .logo { font-size: 1.2rem; }
+            .logo span { display: inline; margin-left: 5px; font-size: 1.2rem; }
+            .logo-circle { width: 35px; height: 35px; }
+            .btn-cta { font-size: 0.8rem; padding: 8px 12px; }
+            .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .stat-item:last-child { border-bottom: none; }
+            .floating-wa { bottom: 15px; right: 15px; width: 55px; height: 55px; }
+            .floating-wa svg { width: 30px; height: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-circle">
+                <img src="URL_DE_TU_LOGO_AQUI" alt="Logo Imperial Legion">
+            </div>
+            <a href="#" class="logo">Imperial <span>Legion</span></a>
+        </div>
+        <div class="header-contact">
+            <a href="tel:+525500009999" class="urgency-phone">CONTACTO RÁPIDO +52 000 0000 000</a>
+            <a href="https://wa.me/520000000000?text=hola%20Lic.%20Jose%20Julio%2C%20he%20visto%20la%20pagina%2C%20necesito%20que%20me%20ayude%20con%20una%20situacion%20legal" target="_blank" class="btn-cta">Consultar Caso</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container reveal">
+            <h1 class="hero-title">Estrategia. <br>Contundencia. <em>Resultados.</em></h1>
+            <p class="hero-subtitle">Litigio penal, familiar y patrimonial en México.</p>
+        </div>
+    </section>
+
+    <section class="stats reveal">
+        <div class="stat-item"><div class="stat-num">X<span>AÑOS</span></div><div class="stat-label">De práctica profesional</div></div>
+        <div class="stat-item"><div class="stat-num">24<span>HORAS</span></div><div class="stat-label">Guardia permanente</div></div>
+        <div class="stat-item"><div class="stat-num">SJR<span>SEDE</span></div><div class="stat-label">Atención inmediata</div></div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container reveal">
+            <h2 class="quote-text">"Protege a tu familia. <span>Protege tu imperio.</span>"</h2>
+        </div>
+    </section>
+
+    <section class="materias" id="materias">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">I. PRÁCTICA</span>
+                <h2 class="section-title">Nuestras Materias</h2>
+            </div>
+            
+            <div class="materia-grid">
+                <div class="materia-card reveal">
+                    <div class="materia-num">I</div>
+                    <h3>Derecho <em>Penal</em></h3>
+                    <p>Defensa técnica en todas las etapas del proceso penal. Actuación inmediata.</p>
+                    <ul class="materia-list">
+                        <li>Amparo directo e indirecto</li>
+                        <li>Defensa en audiencia inicial</li>
+                        <li>Delitos patrimoniales</li>
+                    </ul>
+                </div>
+                
+                <div class="materia-card reveal">
+                    <div class="materia-num">II</div>
+                    <h3>Derecho <em>Familiar</em></h3>
+                    <p>Asuntos con la reserva y firmeza que exigen.</p>
+                    <ul class="materia-list">
+                        <li>Divorcio incausado y contencioso</li>
+                        <li>Custodia y patria potestad</li>
+                        <li>Sucesiones testamentarias</li>
+                    </ul>
+                </div>
+                
+                <div class="materia-card reveal">
+                    <div class="materia-num">III</div>
+                    <h3>Asesoría <em>Jurídica</em></h3>
+                    <p>Te ayudamos a tomar una decisión estratégica.</p>
+                    <ul class="materia-list">
+                        <li>Contratos civiles y mercantiles</li>
+                        <li>Auditoría legal preventiva</li>
+                        <li>Estructura societaria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="metodo">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">II. SISTEMA</span>
+                <h2 class="section-title">Método de Trabajo</h2>
+            </div>
+            <div class="timeline">
+                <div class="step reveal">
+                    <div class="step-num">01</div>
+                    <h3>Primera Reunión</h3>
+                    <p>Se escucha el asunto completo antes de hablar de honorarios o de estrategia.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-num">02</div>
+                    <h3>Análisis de Expediente</h3>
+                    <p>Estudio de la documental. Se descartan abiertamente las vías inviables.</p>
+                </div>
+                <div class="step reveal">
+                    <div class="step-num">03</div>
+                    <h3>Ejecución</h3>
+                    <p>Representación implacable en juzgados, te explicamos qué fue lo que sucedió.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+        <div class="container">
+            <div class="contacto-grid">
+                <div class="contacto-info reveal">
+                    <div class="section-header">
+                        <span class="section-tag">III. ACCIÓN</span>
+                        <h2 class="section-title">Contacto Directo</h2>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h4>Nuestro despacho</h4>
+                        <p><strong>IMPERIAL LEGION ABOGADOS</strong> Av. Las torres 256</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>Contáctanos</h4>
+                        <p><strong>+52 000 0000 000</strong> Línea para agendar una cita</p>
+                    </div>
+                    <a href="https://wa.me/520000000000?text=hola%20Lic.%20Jose%20Julio%2C%20he%20visto%20la%20pagina%2C%20necesito%20que%20me%20ayude%20con%20una%20situacion%20legal" target="_blank" class="btn-cta" style="width: 100%; font-size: 1.1rem; padding: 15px;">Iniciar Chat en WhatsApp</a>
+                </div>
+
+                <div class="map-container reveal">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661642878703!2d-99.1686937!3d19.4270206!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTkuNDI3MDIwNiwgLTk5LjE2ODY5Mzc!5e0!3m2!1ses!2smx!4v1600000000000!5m2!1ses!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/520000000000?text=hola%20Lic.%20Jose%20Julio%2C%20he%20visto%20la%20pagina%2C%20necesito%20que%20me%20ayude%20con%20una%20situacion%20legal" class="floating-wa" target="_blank" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closePrivacy">&times;</button>
+            <h3 style="color: var(--gold); margin-bottom: 15px; font-family: 'Oswald', sans-serif;">Aviso de Privacidad</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, <strong>Imperial Legion Abogados</strong> Protege todos tus datos y el asunto será completamente privado.</p>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const modal = document.getElementById('privacyModal');
+        const openPrivacy = document.getElementById('openPrivacy');
+        if (openPrivacy) {
+            openPrivacy.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('open');
+            });
+        }
+        
+        const closePrivacy = document.getElementById('closePrivacy');
+        if (closePrivacy) {
+            closePrivacy.addEventListener('click', () => modal.classList.remove('open'));
+        }
+        
+        if (modal) {
+            modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('open'); });
+        }
+    </script>
+</body>
+</html>
